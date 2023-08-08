@@ -8,10 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: my-step
-        run: echo "Hello World!"
+        run: echo "Hello World!" 
+      - name: print-multiple
+        run: | 
+          echo ${{ github.event_name }}
+          echo ${{ github.event.issue.pull_request }}
+          echo ${{ github.event.comment.body }}
 
-      - name: print
-        run : echo github.event_name
 
-      - name: print
-        run : echo ${{ github.event_name }} 
