@@ -1,0 +1,45 @@
+name: deploy_fc
+
+on:
+
+  workflow_dispatch:
+    inputs: 
+      fetchcore-version:
+        description: "version of the fetchcore"
+        default: 11.0.0-20230809.77
+        type: choice
+      fetchcore-instance-name:
+        description: "Name of the fetchcore instance" 
+        type: choice
+
+  workflow_call:
+    inputs: 
+      fetchcore-version:
+        description: "version of the fetchcore"
+        default: 11.0.0-20230809.77
+        type: choice
+      fetchcore-instance-name:
+        description: "Name of the fetchcore instance"
+        type: choice
+
+jobs: 
+
+  check_variable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if variable is set
+        run: |
+          if [ -z "${{ inputs.fetchcore-instance-name }}" ]; then
+            echo "Variable 'fetchcore-instance-name' not set. Setting it..."
+            echo "fetchcore-instance-name=${{ inputs.run_id }}-${{ inputs.run_attempt }}" >> $GITHUB_ENV
+          else
+            echo "Variable 'fetchcore-instance-name' is already set."
+          fi
+
+  print_variable:
+    needs: check_variable
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print the variable
+        run: echo "fetchcore-instance-name: ${{ env.fetchcore-instance-name }}"
+        
