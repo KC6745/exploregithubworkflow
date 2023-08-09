@@ -10,7 +10,6 @@ on:
         type: string
       fetchcore-instance-name:
         description: "Name of the fetchcore instance"
-        required: true
         type: string
 
         
