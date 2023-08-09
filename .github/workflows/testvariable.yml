@@ -10,9 +10,9 @@ on:
         type: string
       fetchcore-instance-name:
         description: "Name of the fetchcore instance"
+        default: mytest01
         type: string
 
-        
 jobs: 
   check_variable:
     runs-on: ubuntu-latest
@@ -31,5 +31,5 @@ jobs:
     steps:
       - name: Print the variable
         run: |
-           echo "fetchcore_instance_name: ${{ inputs.fetchcore_instance_name }}"           
-           echo "fetchcore_instance_name: ${{ env.fetchcore_instance_name }}"
+          echo "fetchcore_instance_name: ${{ inputs.fetchcore_instance_name }}"
+          echo "fetchcore_instance_name from env: $fetchcore_instance_name"
