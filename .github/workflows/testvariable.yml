@@ -10,15 +10,6 @@ on:
       fetchcore-instance-name:
         description: "Name of the fetchcore instance" 
         type: choice
-  workflow_call:
-    inputs: 
-      fetchcore-version:
-        description: "version of the fetchcore"
-        default: 11.0.0-20230809.77
-        type: choice
-      fetchcore-instance-name:
-        description: "Name of the fetchcore instance"
-        type: choice
 
 jobs: 
   check_variable:
@@ -26,9 +17,9 @@ jobs:
     steps:
       - name: Check if variable is set
         run: |
-          if [ -z "${{ inputs.fetchcore-instance-name }}" ]; then
+          if [ -z "${{ inputs.fetchcore_instance_name }}" ]; then
             echo "Variable 'fetchcore-instance-name' not set. Setting it..."
-            echo "fetchcore-instance-name=${{ inputs.fetchcore-version }}-${{ inputs.fetchcore-instance-name }}" >> $GITHUB_ENV
+            echo "fetchcore_instance_name=${{ inputs.fetchcore_version }}-${{ inputs.fetchcore_instance_name }}" >> $GITHUB_ENV
           else
             echo "Variable 'fetchcore-instance-name' is already set."
 
@@ -37,4 +28,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print the variable
-        run: echo "fetchcore-instance-name: ${{ env.fetchcore-instance-name }}"
+        run: |
+           echo "fetchcore_instance_name: ${{ inputs.fetchcore_instance_name }}"           
+           echo "fetchcore_instance_name: ${{ env.fetchcore_instance_name }}"
