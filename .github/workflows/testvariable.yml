@@ -6,16 +6,19 @@ on:
       fetchcore-version:
         description: "version of the fetchcore"
         default: 11.0.0-20230809.77
-        type: choice
+        required: true
+        type: string
       fetchcore-instance-name:
-        description: "Name of the fetchcore instance" 
-        type: choice
+        description: "Name of the fetchcore instance"
+        required: true
+        type: string
 
+        
 jobs: 
   check_variable:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if variable is set
+      - name: Check if the variable is set
         run: |
           if [ -z "${{ inputs.fetchcore_instance_name }}" ]; then
             echo "Variable 'fetchcore-instance-name' not set. Setting it..."
